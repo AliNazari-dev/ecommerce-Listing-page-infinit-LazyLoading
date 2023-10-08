@@ -14,8 +14,8 @@ const ProductsList = () => {
   const [priceSort, setPriceSort] = useState(null);
 
   const handleChangeCategory = (e) => {
-    setCategory(e.target.value);
     setProducts([]);
+    setCategory(e.target.value);
   };
 
   //hook for fetching Product
@@ -87,6 +87,14 @@ const ProductsList = () => {
     setPriceSort(e.target.value);
   };
 
+  const handleResetFilter = () => {
+    setProducts([]);
+    setLoading(true);
+    setCategory(null);
+    setPage(1);
+    setPriceSort(null);
+  };
+
   const filteredData = (products, selected, sort) => {
     let filteredProducts = products;
     //sorting by price
@@ -126,11 +134,16 @@ const ProductsList = () => {
     <div className='container'>
       <div className='navbarContainer d-flex justify-content-between px-3 mb-5 sticky-top bg-light'>
         <h1 className='title mt-3 mx-3 text-success'>Products</h1>
-        <div>
+        <div className='d-flex align-items-center'>
           <Filterproduct
+            category={category}
+            priceSort={priceSort}
             handleChangeCategory={handleChangeCategory}
             handleChangePriceSort={handleChangePriceSort}
           />
+          <button className='mx-3 btn btn-md btn-danger' onClick={handleResetFilter}>
+            reset
+          </button>
         </div>
       </div>
 
