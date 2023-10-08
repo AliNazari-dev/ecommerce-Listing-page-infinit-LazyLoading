@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import ProductsList from "./pages/ProductsList";
 
 const App = () => {
   return (
-    <div className='text-danger'>App</div>
-  )
-}
+    <div>
+      <ProductsList />
+    </div>
+  );
+};
 
-export default App
+export default App;
