@@ -1,8 +1,13 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+this Project created By ALi nazari for Scale Ops Team
+my Github : https://github.com/AliNazari-dev
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1- I Used Lazy loading with out any Library but you can use react-query infinite .
+2- I used fake store Api for fetching my Products .
+3- this project is fully responsive .
+4- I used bootstrap-5 for styling and I think Bootstrap framework is an excellent choice for building .responsive websites
+
+
+
+
