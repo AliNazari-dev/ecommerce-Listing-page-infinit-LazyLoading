@@ -13,7 +13,7 @@ export const useProducts = (page) => {
     let cancel;
     axios({
       method: "GET",
-      url: "https://fakestoreapi.com/products?limit=10",
+      url: "https://fakestoreapi.com/products?limit=6",
       params: { page: page },
       cancelToken: new axios.CancelToken((c) => (cancel = c)),
     })

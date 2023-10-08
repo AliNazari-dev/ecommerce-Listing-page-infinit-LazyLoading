@@ -1,11 +1,12 @@
 import { useState, useRef, useCallback } from "react";
 import { useProducts } from "../hooks/useProducts";
+import ProductCart from "../components/ProductCart";
 
 const ProductsList = () => {
   const [page, setPage] = useState(1);
   const { products, error, fetchMore, loading } = useProducts(page);
-  const observer = useRef();
 
+  const observer = useRef();
   const lastProduct = useCallback(
     (node) => {
       if (loading) return;
@@ -23,6 +24,7 @@ const ProductsList = () => {
   const handleFetch = (e) => {
     setPage(1);
   };
+
   return (
     <div className='container'>
       <h1 className='title m-3'>Products</h1>
@@ -47,18 +49,32 @@ const ProductsList = () => {
           </span>
         </div>
       </div>
-      <div className='productCard'>
-        {products.map((item, index) => {
-          if (products.length === index + 1) {
-            console.log("last elememt");
-            return <p ref={lastProduct}>{item.title}</p>;
-          } else {
-            return <p>{item.title}</p>;
-          }
-        })}
+      <div id='gallery'>
+        <div className='container '>
+          <div className='row'>
+            {products.map((item, i) => {
+              if (products.length === i + 1) {
+                return (
+                  <>
+                    <ProductCart key={item.id} item={item} />
+                    <p ref={lastProduct}></p>
+                  </>
+                );
+              } else {
+                return <ProductCart key={item.id} item={item} />;
+              }
+            })}
+          </div>
+        </div>
       </div>
-      <div>{loading && "...loading"}</div>
-      <div>{error && "somthing had wrong"}</div>
+      <div className='d-flex justify-content-center align-content-center'>
+        {loading && (
+          <button class='btn btn-primary' type='button' disabled>
+            <span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>
+            <span class='visually-hidden'>Loading...</span>
+          </button>
+        )}
+      </div>
     </div>
   );
 };
