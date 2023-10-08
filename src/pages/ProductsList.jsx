@@ -4,6 +4,7 @@ import ProductCart from "../components/ProductCart";
 
 const ProductsList = () => {
   const [page, setPage] = useState(1);
+
   const { products, error, fetchMore, loading } = useProducts(page);
 
   const observer = useRef();
@@ -52,16 +53,19 @@ const ProductsList = () => {
       <div id='gallery'>
         <div className='container '>
           <div className='row'>
-            {products.map((item, i) => {
+            {products?.map((item, i) => {
               if (products.length === i + 1) {
                 return (
-                  <>
-                    <ProductCart key={item.id} item={item} />
-                    <p ref={lastProduct}></p>
-                  </>
+                  <div className='col-lg-3 mb-4' ref={lastProduct} key={item.id++}>
+                    <ProductCart item={item} />
+                  </div>
                 );
               } else {
-                return <ProductCart key={item.id} item={item} />;
+                return (
+                  <div className='col-lg-3 mb-4' key={item.id++}>
+                    <ProductCart item={item} />;
+                  </div>
+                );
               }
             })}
           </div>
@@ -69,9 +73,12 @@ const ProductsList = () => {
       </div>
       <div className='d-flex justify-content-center align-content-center'>
         {loading && (
-          <button class='btn btn-primary' type='button' disabled>
-            <span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>
-            <span class='visually-hidden'>Loading...</span>
+          <button className='btn btn-primary' type='button' disabled>
+            <span
+              className='spinner-border spinner-border-sm'
+              role='status'
+              aria-hidden='true'></span>
+            <span className='visually-hidden'>Loading...</span>
           </button>
         )}
       </div>
