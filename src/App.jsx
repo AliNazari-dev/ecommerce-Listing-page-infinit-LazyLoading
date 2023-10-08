@@ -3,7 +3,7 @@ import ProductsList from "./pages/ProductsList";
 
 const App = () => {
   return (
-    <div>
+    <div className="bg-.bg-secondary">
       <ProductsList />
     </div>
   );
