@@ -1,5 +1,4 @@
 import { useState, useRef, useCallback, useMemo, useEffect } from "react";
-import { useProducts } from "../hooks/useProducts";
 import axios from "axios";
 import ProductCart from "../components/ProductCart";
 import Filterproduct from "../components/filterproduct";
@@ -12,12 +11,14 @@ const ProductsList = () => {
   const [products, setProducts] = useState([]);
   const [fetchMore, setFetchMore] = useState(false);
   const [category, setCategory] = useState(null);
+  const [priceSort, setPriceSort] = useState(null);
 
   const handleChangeCategory = (e) => {
     setCategory(e.target.value);
     setProducts([]);
   };
 
+  //hook for fetching Product
   useEffect(() => {
     setLoading(true);
     setError(false);
@@ -60,9 +61,7 @@ const ProductsList = () => {
         });
     }
     return () => cancel();
-  }, [page, category]);
-
-  const [priceSort, setPriceSort] = useState(null);
+  }, [page, category, priceSort]);
 
   //infinit scoll handler
   const observer = useRef();
@@ -71,7 +70,6 @@ const ProductsList = () => {
       if (loading) return;
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
-        console.log(entries[0].isIntersecting);
         if (entries[0].isIntersecting && fetchMore) {
           setPage((prevPageNumber) => prevPageNumber + 1);
         }
@@ -93,6 +91,12 @@ const ProductsList = () => {
     let filteredProducts = products;
     //sorting by price
     if (sort) {
+      if ("desc") {
+        filteredProducts = filteredProducts.sort((a, b) => a.price - b.price);
+      }
+      if ("asc") {
+        filteredProducts = filteredProducts.sort((a, b) => b.price - a.price);
+      }
     }
 
     //filtering by category
